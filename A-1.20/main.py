@@ -1,0 +1,12 @@
+frase = input('Dime una frease: ')
+frase = frase.upper()
+frase = frase.replace('O', '0')
+frase = frase.replace('A', '4')
+frase = frase.replace('E', '3')
+frase = frase.replace('I', '1')
+frase = frase.replace('S', '5')
+frase = frase.replace('T', '7')
+frase = frase.replace('G', '6')
+frase = frase.replace('B', '8')
+
+print(frase)
