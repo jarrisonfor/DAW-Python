@@ -6,8 +6,8 @@ Usa tres variables (firstname, lastname y age) para almacenar tu nombre, tu apel
 El resultado se mostrará como un mensaje similar al siguiente: "Pepito Franchesco tiene 32 años"
 """
 
-firstname = 'Yeray'
-lastname = 'Gonzalez'
-age = '24'
+firstname = 'Pepito'
+lastname = 'Franchesco'
+age = '32'
 
 print(f'{firstname} {lastname} tiene {age} años')
