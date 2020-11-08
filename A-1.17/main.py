@@ -1,3 +1,31 @@
+"""
+A-1.17 - Estructuras de control - Bucles y Elif
+Escriba un programa que muestre un menú en modo texto y que permita escoger la operación a realizar (suma, resta, multiplicación o división). La aplicación debe solicitar dos números por teclado que posteriormente se podrán modificar y mostrará por pantalla el resultado de operar con ambos números. El menú se mostrará dentro de un bucle siempre y cuando el usuario no escoja la opción número 0 (salir). NOTA: Ten en cuenta que los saltos de línea se llevan a cabo con "\n" para la función print().
+
+Ejemplo:
+
+Introduzca número 1: 6
+Introduzca número 2: 3
+
+
+*********************
+0.Salir
+*********************
+1. Modificar número 1
+2. Modificar número 2
+*********************
+3. Sumar
+4. Restar
+5.Multiplicar
+6.Dividir
+*********************
+
+Escoja una opción: 3
+
+El resultado de la suma es: 9
+"""
+
+
 import os
 
 numero1 = int(input('Introduzca número 1: '))

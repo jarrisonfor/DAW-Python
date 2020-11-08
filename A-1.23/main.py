@@ -1,3 +1,8 @@
+"""
+A-1.23 - Estructuras de control - Suma de dos matrices
+Implementa un programa que permita sumar dos matrices introducidas por teclado. NOTA: No todas las matrices se pueden sumar o restar entre sí. La condición necesaria para sumar o restar dos matrices es que tengan la misma dimensión, es decir, que tengan el mismo número de filas y de columnas. Para sumar matrices de la misma dimensión se suman entre sí los elementos que ocupan el mismo lugar en cada matriz.
+"""
+
 def creaMatrices():
     try:
         m = []

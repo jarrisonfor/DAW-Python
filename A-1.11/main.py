@@ -1,3 +1,15 @@
+"""
+A-1.11 - Sentencias condicionales (III). Ordenar de menor a mayor
+Escriba un programa que pida tres números y los muestre ordenados de menor a mayor
+
+Comparador de números
+Escriba un número: 2000
+Escriba un número: 1980
+Escriba un número: 2500
+
+El resultado es 1980, 2000 y 2500
+"""
+
 numero1 = int(input('Numero 1: '))
 numero2 = int(input('Numero 2: '))
 numero3 = int(input('Numero 3: '))

@@ -1,3 +1,13 @@
+"""
+A-1.21 - Listas de elementos generados aleatoriamente
+1. Se tiene una lista de 125 elementos con valores numéricos enteros generados de forma aleatoria. Se debe realizar lo siguiente:
+
+Leer un valor x y buscar en qué posición de la lista se encuentra
+Llenar otra lista con los elementos de las posiciones impares del vector dado.
+En esta última lista, busque cuántos elementos son múltiplos de 3 y positivos.
+2.
+"""
+
 import random
 randomlist = []
 for i in range(0, 125):
