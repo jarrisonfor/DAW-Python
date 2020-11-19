@@ -19,28 +19,35 @@ N = (n-1) +1
 N = (n-2) + 2 = (n-2) + 1 + 1
 """
 
-""" https://www.geeksforgeeks.org/find-all-combinations-that-adds-upto-given-nber-2/ """
+""" https://www.geeksforgeeks.org/find-all-combinations-that-adds-upto-given-number-2/ """
 
 
 def descomponer(n, i=0, array=[],
-                reducedNum=0):
+                reducedNum=0, original=0):
     if len(array) == 0:
+        original = n
+        n = 1
         array = [0] * n
         reducedNum = n
     if (reducedNum < 0):
         return
     if (reducedNum == 0):
-        print(f'{n} = ' + str("%s + " *
-                              len(array[0:i]) % tuple(array[0:i]))[0:-3])
-        if n == 1:
-            return
+
         if n == array[0]:
-            descomponer(n - 1)
+            if n == original:
+                return
+            sig = n + 1
+            array = [0] * sig
+            nr = sig
+            descomponer(sig, 0, array, nr, original)
+        else:
+            print(f'{n} = ' + str("%s + " *
+                                  len(array[0:i]) % tuple(array[0:i]))[0:-3])
         return
     prev = 1 if(i == 0) else array[i - 1]
     for j in range(prev, n + 1):
         array[i] = j
-        descomponer(n, i + 1, array, reducedNum - j)
+        descomponer(n, i + 1, array, reducedNum - j, original)
 
 
 n = int(input('Dime un numero: '))
