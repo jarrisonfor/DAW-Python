@@ -74,9 +74,9 @@ def tercera():
             aDevolver = round(aDevolver - i, 2)
         if cambio[j] > 0:
             if i <= 2:
-                print(f'{cambio[j]} monedas de {"{:,.2f}".format(i)}€')
+                print(f'{cambio[j]} moneda/s de {"{:,.2f}".format(i)}€')
             else:
-                print(f'{cambio[j]} billetes de {"{:,.2f}".format(i)}€')
+                print(f'{cambio[j]} billete/s de {"{:,.2f}".format(i)}€')
         j += 1
 
 
