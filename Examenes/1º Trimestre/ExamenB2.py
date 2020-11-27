@@ -80,9 +80,6 @@ def tercera():
         j += 1
 
 
-tercera()
-
-
 def cuarta(vector, i):
     if i == 0:
         return (vector[i])
