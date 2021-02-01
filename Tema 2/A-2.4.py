@@ -32,14 +32,23 @@ while (temp > 0):
 """
 from controllers.Racional import Racional
 
-numero1 = Racional(5,4)
+numero1 = Racional(5,-4)
 numero2 = Racional(3,5)
 
-suma = Racional(0,0)
-resta = Racional(0,0)
-
-suma = numero1 + numero2
-resta = numero1 - numero2
-
-print(suma)
-print(resta)
+numero1.setNumerador(-5)
+numero1.setDenominador(-4)
+numero1.cambioSigno()
+print(numero1.getDenominador())
+print(numero1.getNumerador())
+print(numero1 + numero2)
+print(numero1 - numero2)
+print(numero1 * numero2)
+print(numero1 / numero2)
+print(numero1 == numero2)
+print(numero1 != numero2)
+print(numero1 < numero2)
+print(numero1 <= numero2)
+print(numero1 > numero2)
+print(numero1 >= numero2)
+print(numero1)
+print(numero2)
