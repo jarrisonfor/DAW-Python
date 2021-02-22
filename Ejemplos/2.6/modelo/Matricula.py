@@ -1,5 +1,5 @@
-from modelo.Alumno import *
-class Matricula(object):
+from modelo.Alumno import Alumno
+class Matricula:
 
     def __init__(self, codigo, anioacad, alum):
         self._codigo = codigo

@@ -1,2 +1,0 @@
-1A, Pedro, Gómez, Calle Fajardo 1, 928123123, 1, 20/12/1994
-2A, Juan, González, Calle Fajardo 1, 928123121, 2, 15/01/1994

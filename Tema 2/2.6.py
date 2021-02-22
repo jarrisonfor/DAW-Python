@@ -36,18 +36,82 @@ https://online.visual-paradigm.com/app/diagrams/
 """
 
 
-import sqlite3
-conn = sqlite3.connect('./database/sqlite.db')
+
+"""
+clases
+    metodos
+        getters
+        setters
+        __str__
+
+clase persona
+    propiedades
+        dni
+        nombre
+        apellido
+        direccion
+        telefono
+
+    metodos
+        mostrar todo sobre el alumno
+        __str__ abstracto
+
+clase alumno
+    propiedades
+        numero_expediente
+        fecha_nacimiento
+        lista_matriculas
+    metodos
+        Dar de alta alumno
+        Mostrar alumnos
+        mostrar alumno + su expediente, fecha nacimiento y matriculas
+        mostrar matriculas del alumno
+        Borrar alumno
+        __str__ + __str__ de persona
+
+clse profesor
+    propiedades
+        vinculo
+        especialidad
+        lista_modulos
+    metodos
+        Dar de alta profesor
+        Mostrar modulos
+        Mostrar profesores
+        mostrar profesor + su vinculo, especialidad y lista_modulos
+        Asignar módulo a profesor
+        Borrar profesor
+        __str__ + __str__ de persona
+
+clase modulo
+    propiedades
+        codigo
+        nombre
+        profesor?
+    metodos
+        Dar de alta un módulo
+        Mostrar todos los módulos
+        Borrar módulo
+
+clase matricula
+    propiedades
 
 
-c = conn.cursor()
-""" c.execute('''CREATE TABLE stocks
-             (date text, trans text, symbol text, qty real, price real)''') """
-c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+    metodos
+        Dar de alta una matrícula
+        Añadir detalle de matrícula
+        Calificar módulos matrícula
+        Borrar matrícula
 
-t = ('RHAT',)
-c.execute('SELECT * FROM stocks WHERE symbol=?', t)
-print(c.fetchall())
+clase matricula
+    propiedades
 
-conn.commit()
-conn.close()
+
+    metodos
+        Dar de alta una matrícula
+        Añadir detalle de matrícula
+        Calificar módulos matrícula
+        Borrar matrícula
+
+"""
+

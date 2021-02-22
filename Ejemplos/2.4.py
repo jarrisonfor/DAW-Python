@@ -55,8 +55,8 @@ numero2 = Fraccion(3,5)
 suma = Fraccion(0,0)
 resta = Fraccion(0,0)
 
-suma = numero1 + numero2;
-resta = numero1 - numero2;
+suma = numero1 + numero2
+resta = numero1 - numero2
 
 print("La suma es",suma)
 print("La resta es",resta)
