@@ -1,0 +1,5 @@
+bbva 50000000 C/Fasnia 34"
+santander 40000000 C/León y Castillo 31
+caixa 30000000 C/Manolo Millares 4
+bankia 10000000 C/Europa 10
+evobank 20000000 C/Pío VII 34
