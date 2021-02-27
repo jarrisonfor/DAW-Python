@@ -1,6 +1,6 @@
 """
 Donde se usa:
-A-2.3.py
+2.3.py
 
 """
 

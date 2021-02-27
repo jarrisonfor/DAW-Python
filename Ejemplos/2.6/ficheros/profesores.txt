@@ -1,3 +1,0 @@
-1D, Francisco, Atoche, Calle Fajardo 1, 928134567, Funcionario, Informática
-2D, Ana, Martín, Calle Tenerife 42, 92123123, Funcionario, Informática
-3D, Gustavo, Medina, Calle Real 15, 928532753, Funcionario, Informática

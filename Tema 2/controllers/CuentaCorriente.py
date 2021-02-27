@@ -1,6 +1,6 @@
 """
 Donde se usa:
-A-2.2.py
+2.2.py
 
 """
 import datetime

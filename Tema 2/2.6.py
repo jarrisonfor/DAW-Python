@@ -87,7 +87,6 @@ clase modulo
     propiedades
         codigo
         nombre
-        profesor?
     metodos
         Dar de alta un módulo
         Mostrar todos los módulos
@@ -95,7 +94,9 @@ clase modulo
 
 clase matricula
     propiedades
-
+        codigo
+        anioacad
+        detalle_matricula
 
     metodos
         Dar de alta una matrícula
@@ -103,9 +104,11 @@ clase matricula
         Calificar módulos matrícula
         Borrar matrícula
 
-clase matricula
+clase detallematricula
     propiedades
-
+        calificacion
+        matricula
+        modulo
 
     metodos
         Dar de alta una matrícula
@@ -114,4 +117,6 @@ clase matricula
         Borrar matrícula
 
 """
+
+
 
