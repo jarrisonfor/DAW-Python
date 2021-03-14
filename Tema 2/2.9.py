@@ -37,24 +37,49 @@ from controllers.Participacion import Participacion
 databasePath = Path(__file__).parent / "database"
 
 Socio.resetSocioDb(databasePath)
+Director.resetDirectorDb(databasePath)
+Actor.resetActorDb(databasePath)
+Pelicula.resetPeliculaDb(databasePath)
+Ejemplar.resetEjemplarDb(databasePath)
+Participacion.resetParticipacionDb(databasePath)
+Alquiler.resetAlquilerDb(databasePath)
 
+aval = Socio('española', 'pepe', 'perez', 'calle inventada 2',
+             '12345679Z', '928123416', 'masculino')
 
-aval = Socio('española', 'pepe', 'perez', 'calle inventada 2', '12345679Z', '928123416', 'masculino')
-director1 = Director('española', 'juan', 'perez', 'calle inventada', '12345678Z', '928123456', 'masculino', 'Oda', 'suspense')
-actor1 = Actor(director1.getNacionalidad(), director1.getNombre(), director1.getApellido(), director1.getDireccion(), director1.getDni(), director1.getTelefono(), director1.getSexo(), 'L')
-socio1 = Socio(actor1.getNacionalidad(), actor1.getNombre(), actor1.getApellido(), actor1.getDireccion(), actor1.getDni(), actor1.getTelefono(), actor1.getSexo())
-pelicula1 = Pelicula('Death note', 'Inglesa', 'La productora', '01/10/2022', director1)
+director1 = Director('española', 'juan', 'perez', 'calle inventada',
+                     '12345678Z', '928123456', 'masculino', 'Oda', 'suspense')
+
+actor1 = Actor(director1.getNacionalidad(), director1.getNombre(), director1.getApellido(),
+               director1.getDireccion(), director1.getDni(), director1.getTelefono(), director1.getSexo(), 'L')
+
+socio1 = Socio(actor1.getNacionalidad(), actor1.getNombre(), actor1.getApellido(),
+               actor1.getDireccion(), actor1.getDni(), actor1.getTelefono(), actor1.getSexo())
+
+pelicula1 = Pelicula('Death note', 'Inglesa',
+                     'La productora', '01/10/2022', director1)
+
 ejemplar1 = Ejemplar('1', 'Perfecto', pelicula1)
 
 participacion1 = Participacion(actor1, pelicula1, True)
+
 alquiler1 = Alquiler(socio1, ejemplar1, aval, '01/10/2022', '03/10/2022')
+
 
 Socio.saveSocioDb(socio1, databasePath)
 Director.saveDirectorDb(director1, databasePath)
 Actor.saveActorDb(actor1, databasePath)
 Pelicula.savePeliculaDb(pelicula1, databasePath)
-""" Ejemplar.saveEjemplarDb(ejemplar1)
-Participacion.saveParticipacionDb(participacion1)
-Alquiler.saveAlquilerDb(alquiler1) """
+Ejemplar.saveEjemplarDb(ejemplar1, databasePath)
+Participacion.saveParticipacionDb(participacion1, databasePath)
+Alquiler.saveAlquilerDb(alquiler1, databasePath)
 
+
+Socio.mostrarSocioDb(databasePath)
+Director.mostrarDirectorDb(databasePath)
+Actor.mostrarActorDb(databasePath)
+Pelicula.mostrarPeliculaDb(databasePath)
+Ejemplar.mostrarEjemplarDb(databasePath)
+Participacion.mostrarParticipacionDb(databasePath)
+Alquiler.mostrarAlquilerDb(databasePath)
 

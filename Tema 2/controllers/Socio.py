@@ -5,10 +5,14 @@ Donde se usa:
 
 from controllers.Persona import Persona
 import os
+import TableIt
+
+
 class Socio(Persona):
     alquileres = []
     avalados = []
     aval = ''
+
     def __init__(self, nacionalidad, nombre, apellido, direccion, dni, telefono, sexo):
         super().__init__(nacionalidad, nombre, apellido, direccion, dni, telefono, sexo)
 
@@ -36,8 +40,8 @@ class Socio(Persona):
 
     @staticmethod
     def saveSocioDb(socio, databasePath):
-        with open (f'{databasePath}/Socio.csv','a+') as db:
-            db.write(f'{socio.__str__()}')
+        with open(f'{databasePath}/Socio.csv', 'a+') as db:
+            db.write(f'{socio.__str__()}\n')
 
     @staticmethod
     def resetSocioDb(databasePath):
@@ -45,3 +49,15 @@ class Socio(Persona):
             os.remove(f'{databasePath}/Socio.csv')
         except:
             pass
+
+    @staticmethod
+    def mostrarSocioDb(databasePath, filtro=''):
+        print('\nTabla Socio')
+        dataTable = []
+        dataTable.append(['Nacionalidad', 'Nombre', 'Apellido',
+                          'Direccion', 'Dni', 'Telefono', 'Sexo', 'Aval'])
+        with open(f'{databasePath}/Socio.csv', 'r') as db:
+            for linea in db.readlines():
+                if linea.strip().find(filtro) > -1:
+                    dataTable.append(linea.strip().split(';'))
+            TableIt.printTable(dataTable, useFieldNames=True)
