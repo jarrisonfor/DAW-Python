@@ -12,8 +12,8 @@ class Interfaz(object):
         self.ventana = ventana
         self.ventana.title("Calculadora")
         self.ventana.grid_columnconfigure(0, weight=1)
-        self.ventana.geometry('330x230')
-        self.ventana.resizable(0, 0)
+        self.ventana.geometry('350x330')
+        self.ventana.resizable(0, 1)
         self.pantalla = Text(
             ventana,
             state="disabled",
