@@ -1,9 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
 
-crud de equipos
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf-6.4.3/dt-1.10.24/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/zf-6.4.3/dt-1.10.24/datatables.min.js"></script>
 
 
+<div>
+    <table id="sistem-table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Sistema</th>
+            <th>Version</th>
+            <th>Arquitectura</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sistem in sistems %}
+        <tr>
+            <td>{{ sistem.nodeName }}</td>
+            <td>{{ sistem.system }}</td>
+            <td>{{ sistem.release }}</td>
+            <td>{{ sistem.machine }}</td>
+            <td>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="/{{sistem.id}}">
+                            <button type="button" class="btn btn-success">Ver</button>
+                        </a>
+                        <a href="/{{sistem.id}}/delete">
+                            <button type="button" class="btn btn-danger">Borrar</button>
+                        </a>
+                    </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+<script>
+$(document).ready( function () {
+    $('#sistem-table').DataTable({
+        "columnDefs": [
+            { "orderable": false, "targets": 6 }
+        ]
+    });
+} );
+</script>
 
 {% endblock %}

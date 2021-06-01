@@ -1,56 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="card shadow-lg">
-    <div class="card-body p-5">
-        <h1 class="fs-4 card-title fw-bold mb-4">Registrarse</h1>
-        <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
-            {% csrf_token %}
-            {% if alreadyExist %}
-            <div class="alert alert-danger" role="alert">
-                Ese usuario ya existe
-            </div>
-            {% endif %}
-            <div class="mb-3">
-                <label class="mb-2 text-muted" for="name">Usuario</label>
-                <input id="usuario" type="text" class="form-control" name="usuario" value="" required autofocus>
-                <div class="invalid-feedback">
-                    El usuario es requerido
+<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+    <div class="card shadow-lg">
+        <div class="card-body p-5">
+            <h1 class="fs-4 card-title fw-bold mb-4">Registrarse</h1>
+            <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+                {% csrf_token %}
+                {% if alreadyExist %}
+                <div class="alert alert-danger" role="alert">
+                    Ese usuario ya existe
                 </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="mb-2 text-muted" for="email">E-Mail</label>
-                <input id="email" type="email" class="form-control" name="email" value="" required>
-                <div class="invalid-feedback">
-                    El email es requerido
+                {% endif %}
+                <div class="mb-3">
+                    <label class="mb-2 text-muted" for="name">Usuario</label>
+                    <input id="usuario" type="text" class="form-control" name="usuario" value="" required autofocus>
+                    <div class="invalid-feedback">
+                        El usuario es requerido
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-3">
-                <label class="mb-2 text-muted" for="password">Contraseña</label>
-                <input id="password" type="password" class="form-control" name="password" required>
-                <div class="invalid-feedback">
-                    La contraseña es requerida
+                <div class="mb-3">
+                    <label class="mb-2 text-muted" for="email">E-Mail</label>
+                    <input id="email" type="email" class="form-control" name="email" value="" required>
+                    <div class="invalid-feedback">
+                        El email es requerido
+                    </div>
                 </div>
-            </div>
 
-            <p class="form-text text-muted mb-3">
-                Al registrarse, está de acuerdo con nuestros términos y condiciones.
-            </p>
+                <div class="mb-3">
+                    <label class="mb-2 text-muted" for="password">Contraseña</label>
+                    <input id="password" type="password" class="form-control" name="password" required>
+                    <div class="invalid-feedback">
+                        La contraseña es requerida
+                    </div>
+                </div>
 
-            <div class="align-items-center d-flex">
-                <button type="submit" class="btn btn-primary ms-auto">
-                    Registrarse
-                </button>
+                <p class="form-text text-muted mb-3">
+                    Al registrarse, está de acuerdo con nuestros términos y condiciones.
+                </p>
+
+                <div class="align-items-center d-flex">
+                    <button type="submit" class="btn btn-primary ms-auto">
+                        Registrarse
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer py-3 border-0">
+            <div class="text-center">
+                Ya tienes una cuenta? <a href="/login" class="text-dark">Inicia sesion</a>
             </div>
-        </form>
-    </div>
-    <div class="card-footer py-3 border-0">
-        <div class="text-center">
-            Ya tienes una cuenta? <a href="/login" class="text-dark">Inicia sesion</a>
         </div>
     </div>
 </div>
-
 {% endblock %}

@@ -16,11 +16,15 @@ Including another URLconf
 from django.urls import path
 from .views import (
     Index,
-    ApiRest
+    ApiRest,
+    SistemPanel,
+    SistemDelete
 )
 
 
 urlpatterns = [
     path('', Index.as_view(), name='monitor'),
     path('api/postData', ApiRest.as_view()),
+    path('<int:id>', SistemPanel.as_view()),
+    path('<int:id>/delete', SistemDelete.as_view()),
 ]

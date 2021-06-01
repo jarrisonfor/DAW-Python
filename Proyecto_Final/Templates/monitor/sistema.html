@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load monitortags %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="d-flex justify-content-evenly flex-wrap">
+    <div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{sistem.nodeName}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span style="font-weight: bold;">system:
+                    </span>{{sistem.system}}
+                </li>
+                <li class="list-group-item"><span style="font-weight: bold;">release:
+                    </span>{{sistem.release}}
+                </li>
+                <li class="list-group-item"><span style="font-weight: bold;">version:
+                    </span>{{sistem.version}}
+                </li>
+                <li class="list-group-item"><span style="font-weight: bold;">machine:
+                    </span>{{sistem.machine}}
+                </li>
+                <li class="list-group-item"><span style="font-weight: bold;">bootTime:
+                    </span>{{sistem.bootTime|date:'Y-m-d H:i'}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">CPU</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span style="font-weight: bold;">physicalCores:
+                        </span>{{cpuInfo.physicalCores}}
+                    </li>
+                    <li class="list-group-item"><span style="font-weight: bold;">totalCores:
+                        </span>{{cpuInfo.totalCores}}
+                    </li>
+                    <li class="list-group-item"><span style="font-weight: bold;">frequencyMax:
+                        </span>{{cpuInfo.frequencyMax}} Hz
+                    </li>
+                    <li class="list-group-item"><span style="font-weight: bold;">frequencyMin:
+                        </span>{{cpuInfo.frequencyMin}} Hz
+                    </li>
+                    <li class="list-group-item"><span style="font-weight: bold;">frequencyCurrent:
+                        </span>{{cpuInfo.frequencyCurrent}} Hz
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">RAM</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span style="font-weight: bold;">total:
+                        </span>{{ramInfo.total|getsize}}
+                    </li>
+                    <li class="list-group-item"><span style="font-weight: bold;">available:
+                        </span>{{ramInfo.available|getsize}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Discos Duros</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span style="font-weight: bold;">Lectura desde inicio:
+                        </span>{{disk.readBytesFromBoot|getsize}}
+                    </li>
+                    <li class="list-group-item"><span style="font-weight: bold;">Escritura desde inicio:
+                        </span>{{disk.writeBytesFromBoot|getsize}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Network</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span style="font-weight: bold;">Enviado desde inicio:
+                        </span>{{net.sentBytesFromBoot|getsize}}
+                    </li>
+                    <li class="list-group-item"><span style="font-weight: bold;">Recibido desde inicio:
+                        </span>{{net.receivedBytesFromBoot|getsize}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-evenly flex-nowrap" style="margin-top: 15px;">
+    <div style="width: 80%;">
+        <canvas id="cpuUsage"></canvas>
+    </div>
+    <div style="width: 80%;">
+        <canvas id="ramUsage"></canvas>
+    </div>
+</div>
+
+
+<script>
+    let data = {
+        labels: {{ cpuUsage.cpuLabels|safe }},
+    datasets: [{
+        label: 'Cpu Usage',
+        backgroundColor: 'rgb(3, 42, 140)',
+        borderColor: 'rgb(3, 42, 140)',
+        data: {{ cpuUsage.cpuData|safe }},
+        }]
+    };
+    let config = {
+        type: 'line',
+        data,
+        options: {
+            animation: {
+                duration: 0
+            },
+            scales: {
+                y: {
+                    max: 100,
+                    min: 0,
+                    ticks: {
+                        stepSize: 5
+                    }
+                }
+            }
+        }
+    };
+
+    let cpuUsage = new Chart(
+        document.getElementById('cpuUsage'),
+        config
+    );
+
+    data = {
+        labels: {{ ramUsage.ramLabels|safe }},
+    datasets: [{
+        label: 'Ram Usage',
+        backgroundColor: 'rgb(3, 140, 17)',
+        borderColor: 'rgb(3, 140, 17)',
+        data: {{ ramUsage.ramData|safe }},
+        }]
+    };
+    config = {
+        type: 'line',
+        data,
+        options: {
+            animation: {
+                duration: 0
+            },
+            scales: {
+                y: {
+                    max: 100,
+                    min: 0,
+                    ticks: {
+                        stepSize: 5
+                    }
+                }
+            }
+        }
+    };
+
+    let ramUsage = new Chart(
+        document.getElementById('ramUsage'),
+        config
+    );
+    setTimeout(function () {
+        window.location.reload(1);
+    }, 5000);
+</script>
+
+<style>
+    .card {
+        margin-top: 15px;
+    }
+</style>
+
+{% endblock %}

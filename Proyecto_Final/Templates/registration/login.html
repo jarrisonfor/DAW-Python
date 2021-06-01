@@ -1,46 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="card shadow-lg">
-    <div class="card-body p-5">
-        <h1 class="fs-4 card-title fw-bold mb-4">Iniciar Sesion</h1>
-        <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
-            {% csrf_token %}
-            {% if form.errors %}
-            <div class="alert alert-danger" role="alert">
-                No se ha encontrado al usuario
-            </div>
-            {% endif %}
-            <div class="mb-3">
-                <label class="mb-2 text-muted" for="username">Usuario</label>
-                <input id="username" type="text" class="form-control" name="username" value="" required autofocus>
-                <div class="invalid-feedback">
-                    El usuario es requerido
+<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+    <div class="card shadow-lg">
+        <div class="card-body p-5">
+            <h1 class="fs-4 card-title fw-bold mb-4">Iniciar Sesion</h1>
+            <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    No se ha encontrado al usuario
                 </div>
-            </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label class="mb-2 text-muted" for="username">Usuario</label>
+                    <input id="username" type="text" class="form-control" name="username" value="" required autofocus>
+                    <div class="invalid-feedback">
+                        El usuario es requerido
+                    </div>
+                </div>
 
-            <div class="mb-3">
-                <div class="mb-2 w-100">
-                    <label class="text-muted" for="password">Contraseña</label>
+                <div class="mb-3">
+                    <div class="mb-2 w-100">
+                        <label class="text-muted" for="password">Contraseña</label>
+                    </div>
+                    <input id="password" type="password" class="form-control" name="password" required>
+                    <div class="invalid-feedback">
+                        La contraseña es requerida
+                    </div>
                 </div>
-                <input id="password" type="password" class="form-control" name="password" required>
-                <div class="invalid-feedback">
-                    La contraseña es requerida
-                </div>
-            </div>
 
-            <div class="d-flex align-items-center">
-                <button type="submit" class="btn btn-primary ms-auto">
-                    Iniciar
-                </button>
+                <div class="d-flex align-items-center">
+                    <button type="submit" class="btn btn-primary ms-auto">
+                        Iniciar
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer py-3 border-0">
+            <div class="text-center">
+                No tienes una cuenta? <a href="/register" class="text-dark">Crear una</a>
             </div>
-        </form>
-    </div>
-    <div class="card-footer py-3 border-0">
-        <div class="text-center">
-            No tienes una cuenta? <a href="/register" class="text-dark">Crear una</a>
         </div>
     </div>
 </div>
-
 {% endblock %}

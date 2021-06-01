@@ -1,27 +1,36 @@
 version: "3.9"
 
 services:
+    db:
+        image: ghcr.io/linuxserver/mariadb
+        container_name: db
+        environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Europe/London
+        - MYSQL_ROOT_PASSWORD=django
+        - MYSQL_DATABASE=django #optional
+        - MYSQL_USER=django #optional
+        - MYSQL_PASSWORD=django #optional
+        volumes:
+        - ./Database:/config
+        restart: unless-stopped
     adminer:
         image: adminer
         ports:
-            - 80:8080
-    db:
-        image: mariadb
-        volumes:
-        - ./Database:/var/lib/mysql
-        environment:
-        - MARIADB_ROOT_PASSWORD=django
-        - PUID=1000
-        - PGID=1000
-    web:
+            - 81:8080
+        depends_on:
+            - db
+    django:
         build: .
-        command: python manage.py runserver 0.0.0.0:8000
+        command: bash -c "python /code/manage.py makemigrations && python /code/manage.py migrate && python /code/manage.py runserver 0.0.0.0:8000"
         environment:
             - PUID=1000
             - PGID=1000
         volumes:
         - .:/code
         ports:
-        - "8000:8000"
+        - "80:8000"
+        restart: on-failure
         depends_on:
         - db
