@@ -18,7 +18,10 @@ from .views import (
     Index,
     ApiRest,
     SistemPanel,
-    SistemDelete
+    SistemDelete,
+    LinuxDownload,
+    WindowsDownload,
+    PythonDownload,
 )
 
 
@@ -27,4 +30,7 @@ urlpatterns = [
     path('api/postData', ApiRest.as_view()),
     path('<int:id>', SistemPanel.as_view()),
     path('<int:id>/delete', SistemDelete.as_view()),
+    path('linux/download', LinuxDownload.as_view()),
+    path('windows/download', WindowsDownload.as_view()),
+    path('python/download', PythonDownload.as_view()),
 ]

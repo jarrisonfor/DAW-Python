@@ -4,20 +4,26 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
 from .models import Sistem, Cpu, Ram, Disk, Net
-
 from django.shortcuts import redirect
+from django.http.response import FileResponse
+import os
 
 
 class ApiRest(APIView):
     def post(self, request):
         data = JSONParser().parse(request)
-        sistemInfo = Sistem.objects.get_or_create(nodeName=data['sistemInfo']['nodeName'], defaults=data['sistemInfo'])[0]
+        sistemInfo = Sistem.objects.get_or_create(
+            nodeName=data['sistemInfo']['nodeName'],
+            defaults=data['sistemInfo']
+        )[0]
         """ Cpu.objects.update_or_create(data['cpuInfo'], system_id=sistemInfo.id)
         Ram.objects.update_or_create(data['ramInfo'], system_id=sistemInfo.id) """
         Cpu.objects.create(system_id=sistemInfo.id, **data['cpuInfo'])
         Ram.objects.create(system_id=sistemInfo.id, **data['ramInfo'])
         Disk.objects.update_or_create(
-            data['diskInfo'], system_id=sistemInfo.id)
+            data['diskInfo'],
+            system_id=sistemInfo.id
+        )
         Net.objects.update_or_create(data['netInfo'], system_id=sistemInfo.id)
         return Response({"interval": 10})
 
@@ -83,3 +89,27 @@ class SistemDelete(View):
         sistem = get_object_or_404(Sistem, id=id)
         sistem.delete()
         return redirect('monitor')
+
+
+class LinuxDownload(View):
+    def get(self, request):
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        filepath = BASE_DIR + '/dist/linux'
+        file = open(filepath, 'rb')
+        return FileResponse(file)
+
+
+class WindowsDownload(View):
+    def get(self, request):
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        filepath = BASE_DIR + '/dist/windows.zip'
+        file = open(filepath, 'rb')
+        return FileResponse(file)
+
+
+class PythonDownload(View):
+    def get(self, request):
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        filepath = BASE_DIR + '/dist/cliente.py'
+        file = open(filepath, 'rb')
+        return FileResponse(file)

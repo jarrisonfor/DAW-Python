@@ -1,34 +1,48 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf-6.4.3/dt-1.10.24/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/v/zf-6.4.3/dt-1.10.24/datatables.min.js"></script>
+<div class="text-center" >
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-info-circle-fill" data-toggle="tooltip" data-placement="top" title="Proporcionaras informacion de tu equipo a esta pagina si ejecutas alguno de estos clientes."
+        viewBox="0 0 16 16">
+        <path
+            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+    </svg>
+</div>
+<div class="text-center">
+    <a href="python/download">
+        <img class="rounded" style="width: 100px; margin: 0 20px;"
+            src="https://www.securizame.com/wp-content/uploads/2016/05/Python-logo-notext.svg_.png" alt="python">
+    </a>
+    <a href="windows/download">
+        <img class="rounded" style="width: 100px; margin: 0 20px;"
+            src="https://agsystems.es/wp-content/uploads/2017/10/windows-10-icon-logo.png" alt="windows">
+    </a>
+    <a href="linux/download">
+        <img class="rounded" style="width: 100px; margin: 0 20px;"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png" alt="linux">
+    </a>
+</div>
 
-
-<div>
+<div style="margin: 20px 10px;">
     <table id="sistem-table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Sistema</th>
-            <th>Version</th>
-            <th>Arquitectura</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for sistem in sistems %}
-        <tr>
-            <td>{{ sistem.nodeName }}</td>
-            <td>{{ sistem.system }}</td>
-            <td>{{ sistem.release }}</td>
-            <td>{{ sistem.machine }}</td>
-            <td>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Sistema</th>
+                <th>Version</th>
+                <th>Arquitectura</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sistem in sistems %}
+            <tr>
+                <td>{{ sistem.nodeName }}</td>
+                <td>{{ sistem.system }}</td>
+                <td>{{ sistem.release }}</td>
+                <td>{{ sistem.machine }}</td>
+                <td>
                     <div class="d-grid gap-2 d-md-block">
                         <a href="/{{sistem.id}}">
                             <button type="button" class="btn btn-success">Ver</button>
@@ -37,21 +51,24 @@
                             <button type="button" class="btn btn-danger">Borrar</button>
                         </a>
                     </div>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </div>
 
 <script>
-$(document).ready( function () {
-    $('#sistem-table').DataTable({
-        "columnDefs": [
-            { "orderable": false, "targets": 6 }
-        ]
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $(document).ready(function () {
+        $('#sistem-table').DataTable({
+            "columnDefs": [
+                { "orderable": false, "targets": 4 }
+            ]
+        });
     });
-} );
 </script>
 
 {% endblock %}
