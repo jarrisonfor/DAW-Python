@@ -1,0 +1,62 @@
+[
+{
+    "model": "Monitor.sistem",
+    "pk": 1,
+    "fields": {
+        "system": "Linux",
+        "nodeName": "yeray-PC",
+        "release": "5.4.0-73-generic",
+        "version": "#82-Ubuntu SMP Wed Apr 14 17:39:42 UTC 2021",
+        "machine": "x86_64",
+        "processor": "x86_64",
+        "bootTime": "2021-06-01T08:51:24",
+        "creationDate": "2021-06-01T18:34:42.821"
+    }
+},
+{
+    "model": "Monitor.cpu",
+    "pk": 1,
+    "fields": {
+        "system": 1,
+        "physicalCores": 8,
+        "totalCores": 8,
+        "frequencyMax": 4900.0,
+        "frequencyMin": 800.0,
+        "frequencyCurrent": 1275.2,
+        "cpuTotalUsage": 28.0,
+        "creationDate": "2021-06-01T18:34:42.830"
+    }
+},
+{
+    "model": "Monitor.ram",
+    "pk": 1,
+    "fields": {
+        "system": 1,
+        "total": 33604755456,
+        "available": 28062294016,
+        "used": 4795789312,
+        "percentage": 16.5,
+        "creationDate": "2021-06-01T18:34:42.838"
+    }
+},
+{
+    "model": "Monitor.disk",
+    "pk": 1,
+    "fields": {
+        "system": 1,
+        "readBytesFromBoot": 3934242816,
+        "writeBytesFromBoot": 19086054400,
+        "creationDate": "2021-06-01T18:34:42.848"
+    }
+},
+{
+    "model": "Monitor.net",
+    "pk": 1,
+    "fields": {
+        "system": 1,
+        "sentBytesFromBoot": 965603367,
+        "receivedBytesFromBoot": 4955165725,
+        "creationDate": "2021-06-01T18:34:42.858"
+    }
+}
+]

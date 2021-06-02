@@ -16,8 +16,8 @@ class ApiRest(APIView):
             nodeName=data['sistemInfo']['nodeName'],
             defaults=data['sistemInfo']
         )[0]
-        """ Cpu.objects.update_or_create(data['cpuInfo'], system_id=sistemInfo.id)
-        Ram.objects.update_or_create(data['ramInfo'], system_id=sistemInfo.id) """
+        ''' Cpu.objects.update_or_create(data['cpuInfo'], system_id=sistemInfo.id)
+        Ram.objects.update_or_create(data['ramInfo'], system_id=sistemInfo.id) '''
         Cpu.objects.create(system_id=sistemInfo.id, **data['cpuInfo'])
         Ram.objects.create(system_id=sistemInfo.id, **data['ramInfo'])
         Disk.objects.update_or_create(
@@ -25,7 +25,7 @@ class ApiRest(APIView):
             system_id=sistemInfo.id
         )
         Net.objects.update_or_create(data['netInfo'], system_id=sistemInfo.id)
-        return Response({"interval": 10})
+        return Response({'interval': 10})
 
 
 class Index(View):
@@ -40,52 +40,68 @@ class SistemPanel(View):
         if not request.user.is_authenticated:
             return redirect('login/')
         sistem = get_object_or_404(Sistem, id=id)
-        cpus = Cpu.objects.filter(system_id=id).order_by('-creationDate')[:20][::-1]
-        cpuLabels = []
-        cpuData = []
-        for cpu in cpus:
-            cpuData.append(cpu.cpuTotalUsage)
-            cpuLabels.append(cpu.creationDate.strftime("%H:%M:%S"))
-            cpuInfo = {
-                "physicalCores": cpu.physicalCores,
-                "totalCores": cpu.totalCores,
-                "frequencyMax": cpu.frequencyMax,
-                "frequencyMin": cpu.frequencyMin,
-                "frequencyCurrent": cpu.frequencyCurrent,
-            }
-        rams = Ram.objects.filter(system_id=id).order_by('-creationDate')[:20][::-1]
-        ramLabels = []
-        ramData = []
-        for ram in rams:
-            ramData.append(ram.percentage)
-            ramLabels.append(ram.creationDate.strftime("%H:%M:%S"))
-            ramInfo = {
-                "total": ram.total,
-                "available": ram.available,
-            }
+        cpuData = self.getCpuData(id)
+        ramData = self.getRamData(id)
         disk = Disk.objects.get(system_id=id)
         net = Net.objects.get(system_id=id)
         return render(request, 'monitor/sistema.html', {
             'sistem': sistem,
-            'cpuInfo': cpuInfo,
-            'cpuUsage': {
-                "cpuLabels": cpuLabels,
-                "cpuData": cpuData,
-            },
-            'ramInfo': ramInfo,
-            'ramUsage': {
-                "ramLabels": ramLabels,
-                "ramData": ramData,
-            },
+            'cpuInfo': cpuData['cpuInfo'],
+            'cpuUsage': cpuData['chartInfo'],
+            'ramInfo': ramData['ramInfo'],
+            'ramUsage': ramData['chartInfo'],
             'disk': disk,
             'net': net,
         })
+
+    def getCpuData(self, id):
+        cpus = Cpu.objects.filter(system_id=id).order_by(
+            '-creationDate')[:20][::-1]
+        cpuLabels = []
+        cpuData = []
+        for cpu in cpus:
+            cpuData.append(cpu.cpuTotalUsage)
+            cpuLabels.append(cpu.creationDate.strftime('%H:%M:%S'))
+            cpuInfo = {
+                'physicalCores': cpu.physicalCores,
+                'totalCores': cpu.totalCores,
+                'frequencyMax': cpu.frequencyMax,
+                'frequencyMin': cpu.frequencyMin,
+                'frequencyCurrent': cpu.frequencyCurrent,
+            }
+        return {
+            'chartInfo': {
+                'cpuLabels': cpuLabels,
+                'cpuData': cpuData,
+            },
+            'cpuInfo': cpuInfo
+        }
+
+    def getRamData(self, id):
+        rams = Ram.objects.filter(system_id=id).order_by(
+            '-creationDate')[:20][::-1]
+        ramLabels = []
+        ramData = []
+        for ram in rams:
+            ramData.append(ram.percentage)
+            ramLabels.append(ram.creationDate.strftime('%H:%M:%S'))
+            ramInfo = {
+                'total': ram.total,
+                'available': ram.available,
+            }
+        return {
+            'chartInfo': {
+                'ramLabels': ramLabels,
+                'ramData': ramData,
+            },
+            'ramInfo': ramInfo
+        }
 
 
 class SistemDelete(View):
     def get(self, request, id):
         if not request.user.is_authenticated:
-            return render('login/')
+            return redirect('login/')
         sistem = get_object_or_404(Sistem, id=id)
         sistem.delete()
         return redirect('monitor')
@@ -93,6 +109,8 @@ class SistemDelete(View):
 
 class LinuxDownload(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login/')
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         filepath = BASE_DIR + '/dist/linux'
         file = open(filepath, 'rb')
@@ -101,6 +119,8 @@ class LinuxDownload(View):
 
 class WindowsDownload(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login/')
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         filepath = BASE_DIR + '/dist/windows.zip'
         file = open(filepath, 'rb')
@@ -109,6 +129,8 @@ class WindowsDownload(View):
 
 class PythonDownload(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login/')
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         filepath = BASE_DIR + '/dist/cliente.py'
         file = open(filepath, 'rb')
