@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -56,19 +57,9 @@
             {% endfor %}
         </tbody>
     </table>
-</div>
 
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    $(document).ready(function () {
-        $('#sistem-table').DataTable({
-            "columnDefs": [
-                { "orderable": false, "targets": 4 }
-            ]
-        });
-    });
-</script>
+<script src="{% static 'datatable.js' %}"></script>
+
+</div>
 
 {% endblock %}
